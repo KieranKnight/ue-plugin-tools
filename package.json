@@ -93,6 +93,46 @@
         "command": "ue-plugin-tools.refreshUEVersions",
         "title": "Refresh UE Versions",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "ue-plugin-tools.setPluginUEVersion",
+        "title": "Set Default UE Version",
+        "icon": "$(versions)"
+      },
+      {
+        "command": "ue-plugin-tools.clearPluginUEVersion",
+        "title": "Remove UE Version",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "ue-plugin-tools.cleanBuildOutput",
+        "title": "Clean Build Output",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "ue-plugin-tools.packageRelease",
+        "title": "Package as Release Zip",
+        "icon": "$(archive)"
+      },
+      {
+        "command": "ue-plugin-tools.launchUEProject",
+        "title": "Launch UE Project",
+        "icon": "$(play)"
+      },
+      {
+        "command": "ue-plugin-tools.generateVSProjectFiles",
+        "title": "Generate VS Project Files",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "ue-plugin-tools.rebuildProject",
+        "title": "Build Project C++",
+        "icon": "$(tools)"
+      },
+      {
+        "command": "ue-plugin-tools.linkPluginToProject",
+        "title": "UE: Link Plugin to Project",
+        "icon": "$(link)"
       }
     ],
     "menus": {
@@ -156,12 +196,62 @@
         },
         {
           "command": "ue-plugin-tools.openOutputFolder",
-          "when": "view == uePluginTools.pluginsView && viewItem == outputFolder",
+          "when": "view == uePluginTools.pluginsView && viewItem =~ /^outputFolder/",
           "group": "1_actions@1"
         },
         {
+          "command": "ue-plugin-tools.launchUEProject",
+          "when": "view == uePluginTools.pluginsView && viewItem == outputFolderWithProject",
+          "group": "1_actions@2"
+        },
+        {
+          "command": "ue-plugin-tools.generateVSProjectFiles",
+          "when": "view == uePluginTools.pluginsView && viewItem == outputFolderWithProject",
+          "group": "1_actions@3"
+        },
+        {
+          "command": "ue-plugin-tools.rebuildProject",
+          "when": "view == uePluginTools.pluginsView && viewItem == outputFolderWithProject",
+          "group": "1_actions@4"
+        },
+        {
+          "command": "ue-plugin-tools.cleanBuildOutput",
+          "when": "view == uePluginTools.pluginsView && viewItem =~ /^outputFolder/",
+          "group": "8_clean@1"
+        },
+        {
+          "command": "ue-plugin-tools.packageRelease",
+          "when": "view == uePluginTools.pluginsView && viewItem =~ /^outputFolder/",
+          "group": "8_clean@2"
+        },
+        {
           "command": "ue-plugin-tools.removeOutputFolder",
-          "when": "view == uePluginTools.pluginsView && viewItem == outputFolder",
+          "when": "view == uePluginTools.pluginsView && viewItem =~ /^outputFolder/",
+          "group": "9_remove"
+        },
+        {
+          "command": "ue-plugin-tools.setPluginUEVersion",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "3_ueversion@1"
+        },
+        {
+          "command": "ue-plugin-tools.linkPluginToProject",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "1_actions@5"
+        },
+        {
+          "command": "ue-plugin-tools.setPluginUEVersion",
+          "when": "view == uePluginTools.pluginsView && viewItem == noPluginUEVersion",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "ue-plugin-tools.setPluginUEVersion",
+          "when": "view == uePluginTools.pluginsView && viewItem == pluginUEVersion",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "ue-plugin-tools.clearPluginUEVersion",
+          "when": "view == uePluginTools.pluginsView && viewItem == pluginUEVersion",
           "group": "9_remove"
         }
       ]
