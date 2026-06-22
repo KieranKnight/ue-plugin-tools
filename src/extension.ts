@@ -16,6 +16,7 @@ import { removeOutputFolderCommand } from './commands/removeOutputFolder';
 import { setPluginUEVersionCommand } from './commands/setPluginUEVersion';
 import { clearPluginUEVersionCommand } from './commands/clearPluginUEVersion';
 import { cleanBuildOutputCommand, packageReleaseCommand } from './commands/cleanBuildOutput';
+import { linkPluginToProjectCommand } from './commands/linkPluginToProject';
 import { launchUEProjectCommand } from './commands/launchUEProject';
 import { generateVSProjectFilesCommand } from './commands/generateVSProjectFiles';
 import { rebuildProjectCommand } from './commands/rebuildProject';
@@ -125,6 +126,11 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       'ue-plugin-tools.rebuildProject',
       (item: OutputFolderItem) => rebuildProjectCommand(item)
+    ),
+
+    vscode.commands.registerCommand(
+      'ue-plugin-tools.linkPluginToProject',
+      (item?: PluginItem) => linkPluginToProjectCommand(item)
     )
   );
 }
