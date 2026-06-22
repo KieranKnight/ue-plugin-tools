@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import type { PluginEntry } from '../types';
-import { getPlugins } from '../config';
+import { getPlugins, getUEVersions } from '../config';
+import { findUProject } from '../services/uprojectFinder';
 
 export class PluginItem extends vscode.TreeItem {
   constructor(public readonly entry: PluginEntry) {
@@ -13,16 +14,32 @@ export class PluginItem extends vscode.TreeItem {
   }
 }
 
+export class PluginUEVersionItem extends vscode.TreeItem {
+  constructor(
+    public readonly pluginId: string,
+    ueVersionName?: string,
+    ueVersionInstallPath?: string
+  ) {
+    const isSet = !!ueVersionName;
+    super(isSet ? ueVersionName! : 'No default UE version', vscode.TreeItemCollapsibleState.None);
+    this.description = isSet ? ueVersionInstallPath : 'right-click plugin to set';
+    this.tooltip = isSet ? ueVersionInstallPath : 'No default UE version set';
+    this.contextValue = isSet ? 'pluginUEVersion' : 'noPluginUEVersion';
+    this.iconPath = new vscode.ThemeIcon(isSet ? 'versions' : 'circle-slash');
+  }
+}
+
 export class OutputFolderItem extends vscode.TreeItem {
   constructor(
     public readonly folderPath: string,
-    public readonly pluginId: string
+    public readonly pluginId: string,
+    public readonly uprojectPath?: string
   ) {
     super(path.basename(folderPath), vscode.TreeItemCollapsibleState.None);
     this.description = folderPath;
     this.tooltip = folderPath;
-    this.contextValue = 'outputFolder';
-    this.iconPath = new vscode.ThemeIcon('folder');
+    this.contextValue = uprojectPath ? 'outputFolderWithProject' : 'outputFolder';
+    this.iconPath = new vscode.ThemeIcon(uprojectPath ? 'root-folder' : 'folder');
   }
 }
 
@@ -44,13 +61,28 @@ export class PluginsProvider implements vscode.TreeDataProvider<vscode.TreeItem>
     }
 
     if (element instanceof PluginItem) {
+      const versions = getUEVersions();
+      const resolvedVersion = element.entry.defaultUEVersionId
+        ? versions.find(v => v.id === element.entry.defaultUEVersionId)
+        : undefined;
+
+      const ueVersionItem = new PluginUEVersionItem(
+        element.entry.id,
+        resolvedVersion?.name,
+        resolvedVersion?.installPath
+      );
+
       const folders = element.entry.outputFolders ?? [];
-      if (folders.length === 0) {
-        const placeholder = new vscode.TreeItem('No output folders — right-click plugin to add one');
-        placeholder.contextValue = 'noOutputFolder';
-        return [placeholder];
-      }
-      return folders.map(f => new OutputFolderItem(f, element.entry.id));
+      const folderItems =
+        folders.length === 0
+          ? [(() => {
+              const p = new vscode.TreeItem('No output folders — right-click plugin to add one');
+              p.contextValue = 'noOutputFolder';
+              return p;
+            })()]
+          : folders.map(f => new OutputFolderItem(f, element.entry.id, findUProject(f) ?? undefined));
+
+      return [ueVersionItem, ...folderItems];
     }
 
     return [];
