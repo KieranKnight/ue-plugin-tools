@@ -1,0 +1,217 @@
+{
+  "name": "ue-plugin-tools",
+  "displayName": "UE Plugin Tools",
+  "publisher": "180studios",
+  "description": "Manage, build, and deploy Unreal Engine plugins — no backend required",
+  "version": "0.2.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "uePluginTools",
+          "title": "UE Plugin Tools",
+          "icon": "media/ue-plugin-tools.svg"
+        }
+      ]
+    },
+    "views": {
+      "uePluginTools": [
+        {
+          "id": "uePluginTools.pluginsView",
+          "name": "Plugins"
+        },
+        {
+          "id": "uePluginTools.ueVersionsView",
+          "name": "UE Versions"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ue-plugin-tools.addPlugin",
+        "title": "Add Plugin",
+        "icon": "$(add)"
+      },
+      {
+        "command": "ue-plugin-tools.removePlugin",
+        "title": "Remove Plugin",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "ue-plugin-tools.discoverUEVersions",
+        "title": "Discover UE Versions",
+        "icon": "$(search)"
+      },
+      {
+        "command": "ue-plugin-tools.addUEVersion",
+        "title": "Add UE Version",
+        "icon": "$(add)"
+      },
+      {
+        "command": "ue-plugin-tools.removeUEVersion",
+        "title": "Remove UE Version",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "ue-plugin-tools.copyPluginToProject",
+        "title": "UE: Copy Plugin to Project"
+      },
+      {
+        "command": "ue-plugin-tools.buildPlugin",
+        "title": "UE: Build Plugin"
+      },
+      {
+        "command": "ue-plugin-tools.deployRelease",
+        "title": "UE: Deploy Release to Project"
+      },
+      {
+        "command": "ue-plugin-tools.copyAndBuild",
+        "title": "UE: Copy Plugin and Build"
+      },
+      {
+        "command": "ue-plugin-tools.addOutputFolder",
+        "title": "Add Output Folder",
+        "icon": "$(add)"
+      },
+      {
+        "command": "ue-plugin-tools.removeOutputFolder",
+        "title": "Remove Output Folder",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "ue-plugin-tools.openOutputFolder",
+        "title": "Open in Explorer",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "ue-plugin-tools.refreshUEVersions",
+        "title": "Refresh UE Versions",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "ue-plugin-tools.addPlugin",
+          "when": "view == uePluginTools.pluginsView",
+          "group": "navigation"
+        },
+        {
+          "command": "ue-plugin-tools.discoverUEVersions",
+          "when": "view == uePluginTools.ueVersionsView",
+          "group": "navigation"
+        },
+        {
+          "command": "ue-plugin-tools.addUEVersion",
+          "when": "view == uePluginTools.ueVersionsView",
+          "group": "navigation"
+        },
+        {
+          "command": "ue-plugin-tools.refreshUEVersions",
+          "when": "view == uePluginTools.ueVersionsView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "ue-plugin-tools.copyPluginToProject",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "ue-plugin-tools.buildPlugin",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "1_actions@2"
+        },
+        {
+          "command": "ue-plugin-tools.copyAndBuild",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "1_actions@3"
+        },
+        {
+          "command": "ue-plugin-tools.deployRelease",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "1_actions@4"
+        },
+        {
+          "command": "ue-plugin-tools.removePlugin",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "9_remove"
+        },
+        {
+          "command": "ue-plugin-tools.removeUEVersion",
+          "when": "view == uePluginTools.ueVersionsView && viewItem == ueVersion",
+          "group": "9_remove"
+        },
+        {
+          "command": "ue-plugin-tools.addOutputFolder",
+          "when": "view == uePluginTools.pluginsView && viewItem == plugin",
+          "group": "2_outputs@1"
+        },
+        {
+          "command": "ue-plugin-tools.openOutputFolder",
+          "when": "view == uePluginTools.pluginsView && viewItem == outputFolder",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "ue-plugin-tools.removeOutputFolder",
+          "when": "view == uePluginTools.pluginsView && viewItem == outputFolder",
+          "group": "9_remove"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "UE Plugin Tools",
+      "properties": {
+        "uePluginTools.plugins": {
+          "type": "array",
+          "default": [],
+          "description": "Registered plugin entries (managed via the sidebar — avoid editing manually)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "path": { "type": "string" }
+            }
+          }
+        },
+        "uePluginTools.ueVersions": {
+          "type": "array",
+          "default": [],
+          "description": "Registered UE installations (managed via the sidebar — avoid editing manually)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "version": { "type": "string" },
+              "installPath": { "type": "string" }
+            }
+          }
+        },
+        "uePluginTools.epicGamesPath": {
+          "type": "string",
+          "default": "C:\\Program Files\\Epic Games",
+          "description": "Root folder for Epic Games installations, used by 'Discover UE Versions'"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.js",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "esbuild": "^0.21.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}
