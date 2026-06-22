@@ -5,7 +5,7 @@ import * as path from 'path';
 
 let outputChannel: vscode.OutputChannel | undefined;
 
-function getChannel(): vscode.OutputChannel {
+export function getChannel(): vscode.OutputChannel {
   if (!outputChannel) {
     outputChannel = vscode.window.createOutputChannel('UE Plugin Tools');
   }
