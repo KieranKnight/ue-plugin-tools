@@ -13,7 +13,9 @@ import { buildPluginCommand } from './commands/buildPlugin';
 import { deployReleaseCommand } from './commands/deployRelease';
 import { addOutputFolderCommand } from './commands/addOutputFolder';
 import { removeOutputFolderCommand } from './commands/removeOutputFolder';
-import { OutputFolderItem } from './providers/pluginsProvider';
+import { setPluginUEVersionCommand } from './commands/setPluginUEVersion';
+import { clearPluginUEVersionCommand } from './commands/clearPluginUEVersion';
+import { OutputFolderItem, PluginUEVersionItem } from './providers/pluginsProvider';
 
 export function activate(context: vscode.ExtensionContext) {
   const pluginsProvider = new PluginsProvider();
@@ -84,7 +86,17 @@ export function activate(context: vscode.ExtensionContext) {
 
     vscode.commands.registerCommand('ue-plugin-tools.refreshUEVersions', () => {
       ueVersionsProvider.refresh();
-    })
+    }),
+
+    vscode.commands.registerCommand(
+      'ue-plugin-tools.setPluginUEVersion',
+      (item: PluginItem | PluginUEVersionItem) => setPluginUEVersionCommand(item, pluginsProvider)
+    ),
+
+    vscode.commands.registerCommand(
+      'ue-plugin-tools.clearPluginUEVersion',
+      (item: PluginUEVersionItem) => clearPluginUEVersionCommand(item, pluginsProvider)
+    )
   );
 }
 
