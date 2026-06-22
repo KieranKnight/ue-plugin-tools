@@ -1,7 +1,7 @@
 {
   "name": "ue-plugin-tools",
   "displayName": "UE Plugin Tools",
-  "publisher": "180studios",
+  "publisher": "kieranknight",
   "description": "Manage, build, and deploy Unreal Engine plugins — no backend required",
   "version": "0.2.0",
   "engines": {
