@@ -3,6 +3,7 @@ export interface PluginEntry {
   name: string;
   path: string;
   outputFolders?: string[];
+  defaultUEVersionId?: string;
 }
 
 export interface UEVersion {

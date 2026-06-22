@@ -69,6 +69,22 @@ export async function removeOutputFolder(pluginId: string, folderPath: string): 
   await cfg().update('plugins', updated, vscode.ConfigurationTarget.Global);
 }
 
+export async function setPluginUEVersion(pluginId: string, ueVersionId: string): Promise<void> {
+  const plugins = getPlugins();
+  const updated = plugins.map(p => (p.id !== pluginId ? p : { ...p, defaultUEVersionId: ueVersionId }));
+  await cfg().update('plugins', updated, vscode.ConfigurationTarget.Global);
+}
+
+export async function clearPluginUEVersion(pluginId: string): Promise<void> {
+  const plugins = getPlugins();
+  const updated = plugins.map(p => {
+    if (p.id !== pluginId) return p;
+    const { defaultUEVersionId: _, ...rest } = p;
+    return rest;
+  });
+  await cfg().update('plugins', updated, vscode.ConfigurationTarget.Global);
+}
+
 export function getEpicGamesPath(): string {
   return cfg().get<string>('epicGamesPath', 'C:\\Program Files\\Epic Games');
 }
