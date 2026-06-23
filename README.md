@@ -1,4 +1,4 @@
-<img width="1579" height="1342" alt="example_gif" src="https://github.com/user-attachments/assets/95a7b836-f8aa-44f0-bab8-21d456ac063a" /><p align="center">
+<p align="center">
 <img width="2255" height="896" alt="lockup" src="https://github.com/user-attachments/assets/81edf8a2-e6bf-4b8e-8638-d4b2816be7aa" />
 </p>
 
