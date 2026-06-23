@@ -305,7 +305,7 @@
   },
   "scripts": {
     "build": "node esbuild.js",
-    "package": "vsce package --no-dependencies --allow-missing-repository"
+    "package": "vsce package --no-dependencies --allow-missing-repository --out releases/"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

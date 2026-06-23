@@ -1,0 +1,13 @@
+src/**
+node_modules/**
+.claude/**
+.serena/**
+.remember/**
+tasks/**
+releases/**
+.gitignore
+tsconfig.json
+esbuild.js
+package-lock.json
+CLAUDE.md
+*.vsix
