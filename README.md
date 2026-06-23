@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/kieranknight/ue-plugin-tools/master/media/icon-256.png" width="128" alt="UE Plugin Tools">
+<img width="2255" height="896" alt="lockup" src="https://github.com/user-attachments/assets/81edf8a2-e6bf-4b8e-8638-d4b2816be7aa" />
 </p>
 
 <h1 align="center">UE Plugin Tools</h1>
