@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="media/icon-256.png" width="128" alt="UE Plugin Tools">
+  <img src="https://raw.githubusercontent.com/kieranknight/ue-plugin-tools/master/media/icon-256.png" width="128" alt="UE Plugin Tools">
 </p>
 
 <h1 align="center">UE Plugin Tools</h1>
