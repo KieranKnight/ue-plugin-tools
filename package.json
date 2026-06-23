@@ -8,6 +8,11 @@
     "vscode": "^1.80.0"
   },
   "categories": ["Other"],
+  "icon": "media/icon-128.png",
+  "galleryBanner": {
+    "color": "#090D14",
+    "theme": "dark"
+  },
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
