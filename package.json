@@ -3,11 +3,14 @@
   "displayName": "UE Plugin Tools",
   "publisher": "kieranknight",
   "description": "Manage, build, and deploy Unreal Engine plugins — no backend required",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "engines": {
     "vscode": "^1.80.0"
   },
-  "categories": ["Other", "Programming Languages"],
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kieranknight/ue-plugin-tools"
@@ -275,9 +278,15 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": { "type": "string" },
-              "name": { "type": "string" },
-              "path": { "type": "string" }
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
             }
           }
         },
@@ -288,10 +297,18 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": { "type": "string" },
-              "name": { "type": "string" },
-              "version": { "type": "string" },
-              "installPath": { "type": "string" }
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "installPath": {
+                "type": "string"
+              }
             }
           }
         },
