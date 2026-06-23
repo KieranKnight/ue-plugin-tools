@@ -144,6 +144,11 @@ All state is stored in VS Code global settings. Avoid editing these arrays by ha
 
 ## Release Notes
 
+### 0.2.1
+
+- Package Cleanup
+- Public releasing
+
 ### 0.2.0
 
 - Default UE version per plugin — set once, used automatically by Build and other commands
